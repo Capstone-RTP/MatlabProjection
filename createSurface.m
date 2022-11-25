@@ -6,7 +6,7 @@ function armPoints=createSurface()
     
     armPoints=zeros(10000,3);
     armPoints(1:5000,1)=linspace(20,30,5000);
-    armPoints(5001:10000)=linspace(30,20,5000);
+    armPoints(5001:10000,1)=linspace(30,20,5000);
     armPoints(:,2)=repmat(theta',100,1);
     
     for ii=0:100:9900
