@@ -1,24 +1,17 @@
+function [cylindricalPath,armXZY] = imageProjectionApp(zOffsetRad,movePlotX,movePlotY,paths)
 %import surface and image
 radius=60;
 yLength=300;
 lengthRes=200;
 thetaRes=200;
-zOffsetRad = 10;
-scale = 0.3;
-movePlotX = 0;
-movePlotY = 100;
 
 armPoints=createSurface(1,radius,yLength,lengthRes,thetaRes); %%INPUT is 0 for cylinder, 1 for non-cylinder
-[paths] = getXYFromIm("C:\Code\Capstone\WEIm.png",scale, 0); %image, scale, downsample rate
-
-%zuv=ones(length(u))*41;
 
 %Convert R theta y values into x,z,y
 armXZY=zeros(size(armPoints));
 armXZY(:,1)=armPoints(:,1).*cos(armPoints(:,2));
 armXZY(:,2)=armPoints(:,1).*sin(armPoints(:,2));
 armXZY(:,3)=armPoints(:,3);
-
 
 %Flatten surface
 for i=0:lengthRes-1
@@ -72,17 +65,21 @@ end
 % axis equal
 % hold off
 % figure
-scatter3(armXZY(:,1),armXZY(:,3),armXZY(:,2),'filled')
-axis equal
-hold on
-%scatter3(projectedPoints(:,1),projectedPoints(:,3),projectedPoints(:,2),'o','filled','red');
+% scatter3(armXZY(:,1),armXZY(:,3),armXZY(:,2),'filled')
+% axis equal
+% hold on
+% %scatter3(projectedPoints(:,1),projectedPoints(:,3),projectedPoints(:,2),'o','filled','red');
 % plot3(projectedPoints(:,1),projectedPoints(:,3),projectedPoints(:,2),'-o','Color','b','MarkerSize',7,...
 %     'MarkerFaceColor','#D9FFFF')
 % axis equal
-plot3(cylindricalPath(:,1).*cos(cylindricalPath(:,2)),cylindricalPath(:,3),cylindricalPath(:,1).*sin(cylindricalPath(:,2)),'-o','Color','b','MarkerSize',7,...
-    'MarkerFaceColor','#D9FFFF')
-hold off
-axis equal
+% hold off
+% 
+% figure
+% plot3(cylindricalPath(:,1).*cos(cylindricalPath(:,2)),cylindricalPath(:,3),cylindricalPath(:,1).*sin(cylindricalPath(:,2)),'-o','Color','b','MarkerSize',7,...
+%     'MarkerFaceColor','#D9FFFF')
+% axis equal
+
+end
 
 
 

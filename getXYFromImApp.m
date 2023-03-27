@@ -1,5 +1,5 @@
 %Sample_rate of 1 seems to be best
-function [paths] = getXYFromIm(im, scale, sample_rate)
+function [paths] = getXYFromImApp(im, scale)
 %Create surface
 %Extract xyz points%
 image=imread(im);
@@ -15,7 +15,6 @@ imSkel = bwskel(imComp);
 cc=bwconncomp(imSkel);
 
 paths = cell(cc.NumObjects,1);
-hold on
 for j=1:cc.NumObjects
     [yi,xi] = ind2sub(size(imSkel),cc.PixelIdxList{j});
 
@@ -27,7 +26,7 @@ for j=1:cc.NumObjects
         ordAndConn(i,:) = pairedIn(closestIdx,:);
         pairedIn(closestIdx,:) = [];
         if(size(pairedIn,1)>1)
-            [closestIdx,dist]=dsearchn(pairedIn,ordAndConn(i,:));
+            closestIdx=dsearchn(pairedIn,ordAndConn(i,:));
         else
             ordAndConn(i+1,:) = pairedIn;
             if(pdist([ordAndConn(1,:);ordAndConn(end,:)])<2)
@@ -36,26 +35,6 @@ for j=1:cc.NumObjects
         end
     end
     paths{j} = ordAndConn;
-    continuousPath = paths{j};
-    plot(continuousPath(:,1),continuousPath(:,2));
-end
-hold off
-
-
-
-%     [L,n] = bwboundaries(imSkel,8);
-%     figure; 
-%     hold on
-%     for k = 1:length(paths)
-%         continuousPath = paths{k};
-%         plot(continuousPath(:,1),continuousPath(:,2));
-%     end
-%     hold off
-
-%Find points that is associaated with the solid lines
-if sample_rate ~=0
-    y = downsample(y, sample_rate);
-    x=downsample(x,sample_rate);
 end
 
 end
