@@ -11,6 +11,7 @@ imBW=imbinarize(imageRe);
 imComp = imcomplement(imBW);
 %Skeletonize
 imSkel = bwskel(imComp);
+imSkel = flipud(imSkel);
 %find continuous lines
 cc=bwconncomp(imSkel);
 

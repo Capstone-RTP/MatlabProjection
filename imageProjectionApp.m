@@ -6,7 +6,6 @@ lengthRes=200;
 thetaRes=200;
 
 armPoints=createSurface(1,radius,yLength,lengthRes,thetaRes); %%INPUT is 0 for cylinder, 1 for non-cylinder
-
 %Convert R theta y values into x,z,y
 armXZY=zeros(size(armPoints));
 armXZY(:,1)=armPoints(:,1).*cos(armPoints(:,2));

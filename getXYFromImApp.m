@@ -3,7 +3,7 @@ function [paths] = getXYFromImApp(im, scale)
 %Create surface
 %Extract xyz points%
 image=imread(im);
-imageGrey = rgb2gray(image);
+imageGrey = im2gray(image);
 imageRe = imresize(imageGrey, scale);
 %Find black and white image
 imBW=imbinarize(imageRe);
@@ -11,8 +11,9 @@ imBW=imbinarize(imageRe);
 imComp = imcomplement(imBW);
 %Skeletonize
 imSkel = bwskel(imComp);
+imSkel = flipud(imSkel);
 %find continuous lines
-cc=bwconncomp(imSkel);
+cc=bwconncomp(fliplr(imSkel));
 
 paths = cell(cc.NumObjects,1);
 for j=1:cc.NumObjects
