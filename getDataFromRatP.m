@@ -1,5 +1,5 @@
 function distVec = getDataFromRatP(scanPath)
-    dist2Cen = 100;
+    dist2Cen = 0;
     %open serial connection
     %if theres an error delete s from workspace and rerun
     s = serialport("COM3",115200);
@@ -14,20 +14,23 @@ function distVec = getDataFromRatP(scanPath)
     drawnow
     %store distance
     distVec = zeros([n,1]);
-    
     for ii = 1:n
+        if ~mod(ii+1,20)
+            d.Message = sprintf('Distance Sample: %d  Progress: %0.1f %% ',scanDist,ii*100/n);
+        end
         %Update progress and cancel from UI
         d.Value = ii/n;
-        if d.CancelRequest
+        if d.CancelRequested
             break
         end
         %write points to UART
-%         write(s, scanPath(ii,:), 'uint16');
-%         %wait for armDist
-%         scanDist = read(s,1,'uint16');
-%         scanRad = dist2Cen - scanDist;
-%         distVec(ii) = scanRad;
-        pause(0.5);
+        write(s, scanPath(ii,:), 'uint16');
+        %wait for armDist
+        scanDist = read(s,1,'uint16');
+        scanRad = dist2Cen - scanDist;
+        distVec(ii) = scanRad;
     end
-
+    clear s
+    close(d);
+    close(fig);
 end
