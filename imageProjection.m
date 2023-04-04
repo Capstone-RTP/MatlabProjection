@@ -2,7 +2,7 @@
 radius=60;
 yLength=300;
 lengthRes=200;
-thetaRes=200;
+thetaRes=100;
 zOffsetRad = 10;
 scale = 0.3;
 movePlotX = 0;

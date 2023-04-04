@@ -1,16 +1,16 @@
-function [cylindricalPath,armXZY] = imageProjectionApp(zOffsetRad,movePlotX,movePlotY,paths)
+function [cylindricalPath,armXZY] = imageProjectionApp(zOffsetRad,movePlotX,movePlotY,paths,surface)
+%Sort rows based on y values
+surface = sortrows(surface,3);
+%Find number of elements in each row
+lengthRes=numel(unique(surface(:,3)));
+thetaRes=numel(unique(surface(:,2)));
 %import surface and image
-radius=60;
-yLength=300;
-lengthRes=200;
-thetaRes=200;
-
-armPoints=createSurface(1,radius,yLength,lengthRes,thetaRes); %%INPUT is 0 for cylinder, 1 for non-cylinder
+armPoints= surface;
 %Convert R theta y values into x,z,y
 armXZY=zeros(size(armPoints));
-armXZY(:,1)=armPoints(:,1).*cos(armPoints(:,2));
-armXZY(:,2)=armPoints(:,1).*sin(armPoints(:,2));
-armXZY(:,3)=armPoints(:,3);
+armXZY(:,1)= armPoints(:,1).*cos(armPoints(:,2)-pi/2);
+armXZY(:,2)= armPoints(:,1).*sin(armPoints(:,2)-pi/2);
+armXZY(:,3)= armPoints(:,3);
 
 %Flatten surface
 for i=0:lengthRes-1
@@ -22,7 +22,6 @@ end
 %find closest points on flattened/unwrapped surface
 projectedPoints = zeros(size(cell2mat(paths))+[2*length(paths) 1]);
 cylindricalPath = zeros(size(cell2mat(paths))+[2*length(paths) 1]);
-
 prevK=0;
 for j=1:length(paths)
     k=dsearchn(tfCords,cell2mat(paths(j)) + [movePlotX movePlotY]);
@@ -73,10 +72,10 @@ end
 % axis equal
 % hold off
 % 
-% figure
-% plot3(cylindricalPath(:,1).*cos(cylindricalPath(:,2)),cylindricalPath(:,3),cylindricalPath(:,1).*sin(cylindricalPath(:,2)),'-o','Color','b','MarkerSize',7,...
-%     'MarkerFaceColor','#D9FFFF')
-% axis equal
+figure
+plot3(cylindricalPath(:,1).*cos(cylindricalPath(:,2)),cylindricalPath(:,3),cylindricalPath(:,1).*sin(cylindricalPath(:,2)),'-o','Color','b','MarkerSize',7,...
+    'MarkerFaceColor','#D9FFFF')
+axis equal
 
 end
 

@@ -1,11 +1,11 @@
-function distVec = getDataFromRatP(scanPath)
-    dist2Cen = 0;
+function distVec = getDataFromRatP(scanPath,smoothing)
+    dist2Cen = 42.3;
     %open serial connection
     %if theres an error delete s from workspace and rerun
     s = serialport("COM3",115200);
     %increase timout
     s.Timeout = 100000;
-    
+   
     n = size(scanPath,1);
     %loading
     fig = uifigure;
@@ -30,6 +30,7 @@ function distVec = getDataFromRatP(scanPath)
         scanRad = dist2Cen - scanDist;
         distVec(ii) = scanRad;
     end
+    distVec = lowpass(distVec-mean(distVec),smoothing) + mean(distVec);
     clear s
     close(d);
     close(fig);
