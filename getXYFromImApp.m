@@ -1,5 +1,5 @@
 %Sample_rate of 1 seems to be best
-function [paths] = getXYFromImApp(im, scale)
+function [paths] = getXYFromImApp(im, scale, xRed, yRed)
 %Create surface
 %Extract xyz points%
 image=imread(im);
@@ -19,7 +19,7 @@ paths = cell(cc.NumObjects,1);
 for j=1:cc.NumObjects
     [yi,xi] = ind2sub(size(imSkel),cc.PixelIdxList{j});
 
-    pairedIn = [xi./4, yi./2];
+    pairedIn = [xi./xRed, yi./yRed];
     ordAndConn = zeros(length(xi),2);
     closestIdx = 1;
 
@@ -37,7 +37,6 @@ for j=1:cc.NumObjects
     end
     paths{j} = ordAndConn;
 end
-
 end
 
 

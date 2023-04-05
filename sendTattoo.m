@@ -2,7 +2,7 @@ function sendTattoo(cyPath)
     %Definitions
     yOffset = -40;
     dis2cen = 60;
-    rOffset = -12;
+    rOffset = -20;
     pulsesPerRev = 200;
     degreesPerRev = 2*pi;
     pitch = 8; %mm/rev

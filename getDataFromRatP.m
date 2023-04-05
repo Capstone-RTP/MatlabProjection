@@ -15,7 +15,7 @@ function distVec = getDataFromRatP(scanPath,smoothing)
     %store distance
     distVec = zeros([n,1]);
     for ii = 1:n
-        if ~mod(ii+1,20)
+        if ~mod(ii+1,round(length(distVec)/100)+1);
             d.Message = sprintf('Distance Sample: %d  Progress: %0.1f %% ',scanDist,ii*100/n);
         end
         %Update progress and cancel from UI
