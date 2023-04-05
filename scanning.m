@@ -24,7 +24,7 @@ plotPoints = repelem(plotTheta,yRes)';
 scanPath(:,2) = scanPath;
 scanPath(:,1) = 0;
 plotPoints(:,2) = plotPoints;
-plotPoints(:,1) = 40;
+plotPoints(:,1) = 25;
 yPoints = yPoints';
 plotY = plotY';
 

@@ -1,11 +1,11 @@
 function sendTattoo(cyPath)
     %Definitions
-    yOffset = 0;
-    dis2cen = 42.3;
-    rOffset = 35;
+    yOffset = -40;
+    dis2cen = 60;
+    rOffset = 0;
     pulsesPerRev = 200;
-    degreesPerRev = 360;
-    pitch = 12; %mm/rev
+    degreesPerRev = 2*pi;
+    pitch = 8; %mm/rev
     thetaN2 = 520;
     thetaN1 = 20;
     

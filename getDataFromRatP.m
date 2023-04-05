@@ -1,5 +1,5 @@
 function distVec = getDataFromRatP(scanPath,smoothing)
-    dist2Cen = 42.3;
+    dist2Cen = 60;
     %open serial connection
     %if theres an error delete s from workspace and rerun
     s = serialport("COM3",115200);

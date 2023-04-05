@@ -19,7 +19,7 @@ paths = cell(cc.NumObjects,1);
 for j=1:cc.NumObjects
     [yi,xi] = ind2sub(size(imSkel),cc.PixelIdxList{j});
 
-    pairedIn = [xi, yi];
+    pairedIn = [xi./4, yi./2];
     ordAndConn = zeros(length(xi),2);
     closestIdx = 1;
 
