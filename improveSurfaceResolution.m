@@ -9,12 +9,12 @@ function hqSurface = improveSurfaceResolution(surface,res)
     
     %Use griddata to interpolate for the mesh
     meshR = griddata(theta,y,radius,meshT,meshY);
-    %Plot
-    figure;
-    surf(meshT,meshY,meshR);
+%     %Plot
+%     figure;
+%     surf(meshT,meshY,meshR);
     %Plot
     hqSurface = cat(2,meshT(:),meshY(:));
     hqSurface = [meshR(:),hqSurface];
     
-    scatter3((hqSurface(:,1)).*(cos(hqSurface(:,2)-pi/2)),hqSurface(:,3),(hqSurface(:,1)).*(sin(hqSurface(:,2)-pi/2)));
+    %scatter3((hqSurface(:,1)).*(cos(hqSurface(:,2)-pi/2)),hqSurface(:,3),(hqSurface(:,1)).*(sin(hqSurface(:,2)-pi/2)));
 end

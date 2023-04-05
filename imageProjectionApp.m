@@ -72,10 +72,10 @@ end
 % axis equal
 % hold off
 % 
-figure
-plot3(cylindricalPath(:,1).*cos(cylindricalPath(:,2)),cylindricalPath(:,3),cylindricalPath(:,1).*sin(cylindricalPath(:,2)),'-o','Color','b','MarkerSize',7,...
-    'MarkerFaceColor','#D9FFFF')
-axis equal
+% figure
+% plot3(cylindricalPath(:,1).*cos(cylindricalPath(:,2)),cylindricalPath(:,3),cylindricalPath(:,1).*sin(cylindricalPath(:,2)),'-o','Color','b','MarkerSize',7,...
+%     'MarkerFaceColor','#D9FFFF')
+% axis equal
 
 end
 
